@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medieval England & 1066 - Flashcards</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/7.23.5/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
+
+        const flashcards = [
+            {
+                question: "What is a period?",
+                answer: "A period is a length of time in history characterized by particular events, developments, or conditions that distinguish it from other times."
+            },
+            {
+                question: "What is a century?",
+                answer: "A century is a period of 100 years."
+            },
+            {
+                question: "How do you calculate which century a year belongs to?",
+                answer: "Divide the year by 100 and round up to the nearest whole number. For example: 1066 ÷ 100 = 10.66, rounded up = 11th century."
+            },
+            {
+                question: "Why did people move to England in the middle ages?",
+                answer: "People moved to England for various reasons including economic opportunities, escaping persecution, seeking better farmland, trade opportunities, and sometimes through invasion or conquest."
+            },
+            {
+                question: "Explain what pull and push factors were with 1 example for each",
+                answer: "Push factors = reasons that force people to leave their home (Example: War, famine, or persecution). Pull factors = reasons that attract people to a new place (Example: Better job opportunities or available land)."
+            },
+            {
+                question: "Why did England suffer a succession crisis in 1066?",
+                answer: "King Edward the Confessor died without an heir in January 1066, and there was no clear successor to the throne. Multiple claimants believed they had the right to be king."
+            },
+            {
+                question: "Who were the 3 leaders fighting over the throne of England in 1066?",
+                answer: "1. Harold Godwinson (Earl of Wessex)\n2. William, Duke of Normandy\n3. Harald Hardrada (King of Norway)"
+            },
+            {
+                question: "What are the 2 important battles of 1066? Who was the winner and loser for each?",
+                answer: "1. Battle of Stamford Bridge (September 1066): Winner = Harold Godwinson; Loser = Harald Hardrada\n2. Battle of Hastings (October 1066): Winner = William of Normandy; Loser = Harold Godwinson"
+            },
+            {
+                question: "Why did the Normans build so many castles in England? How many and in what timeframe?",
+                answer: "The Normans built castles to control the conquered English population, defend against rebellions, and demonstrate Norman power. They built approximately 500 castles in the first 20 years after the conquest (1066-1086)."
+            },
+            {
+                question: "Why did they build the castles out of wood?",
+                answer: "Wood was quick and easy to build with, allowing castles to be constructed rapidly. This was essential for establishing control quickly after the conquest. Wood was also readily available."
+            },
+            {
+                question: "What type of castle did they build? What did they look like?",
+                answer: "They built motte-and-bailey castles. These consisted of a raised earth mound (motte) with a wooden tower on top, and an enclosed courtyard (bailey) at the base, surrounded by a wooden fence and ditch."
+            },
+            {
+                question: "Why did William I terrorize the North of England?",
+                answer: "To punish rebellions against Norman rule and to prevent future uprisings. The North had resisted Norman control, so William wanted to crush opposition and establish his authority through fear."
+            },
+            {
+                question: "How did he do it?",
+                answer: "Through the 'Harrying of the North' (1069-1070), William's forces destroyed villages, farms, crops, and livestock. They killed people and burned settlements, causing widespread famine and death. This brutal campaign devastated the region."
+            }
+        ];
+
+        const ChevronLeft = () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+        );
+
+        const ChevronRight = () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+        );
+
+        const RotateCcw = () => (
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="1 4 1 10 7 10"></polyline>
+                <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"></path>
+            </svg>
+        );
+
+        function FlashcardApp() {
+            const [currentCard, setCurrentCard] = useState(0);
+            const [isFlipped, setIsFlipped] = useState(false);
+            const [showAnswer, setShowAnswer] = useState(false);
+
+            const handleNext = () => {
+                if (currentCard < flashcards.length - 1) {
+                    setCurrentCard(currentCard + 1);
+                    setIsFlipped(false);
+                    setShowAnswer(false);
+                }
+            };
+
+            const handlePrevious = () => {
+                if (currentCard > 0) {
+                    setCurrentCard(currentCard - 1);
+                    setIsFlipped(false);
+                    setShowAnswer(false);
+                }
+            };
+
+            const handleFlip = () => {
+                setIsFlipped(!isFlipped);
+                setShowAnswer(!showAnswer);
+            };
+
+            const handleReset = () => {
+                setCurrentCard(0);
+                setIsFlipped(false);
+                setShowAnswer(false);
+            };
+
+            return (
+                <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+                    <div className="max-w-2xl w-full">
+                        <div className="text-center mb-8">
+                            <h1 className="text-4xl font-bold text-gray-800 mb-2">Medieval England & 1066</h1>
+                            <p className="text-gray-600">Year 1 History Flashcards</p>
+                        </div>
+
+                        <div className="bg-white rounded-2xl shadow-2xl p-8 mb-6 min-h-96 flex flex-col justify-between">
+                            <div className="flex justify-between items-center mb-6">
+                                <span className="text-sm font-semibold text-indigo-600 bg-indigo-50 px-4 py-2 rounded-full">
+                                    Card {currentCard + 1} of {flashcards.length}
+                                </span>
+                                <button
+                                    onClick={handleReset}
+                                    className="text-gray-500 hover:text-gray-700 transition-colors"
+                                    title="Reset to first card"
+                                >
+                                    <RotateCcw />
+                                </button>
+                            </div>
+
+                            <div 
+                                className="flex-1 flex items-center justify-center cursor-pointer"
+                                onClick={handleFlip}
+                            >
+                                <div className="text-center px-4">
+                                    <p className="text-sm font-semibold text-indigo-600 mb-4">
+                                        {showAnswer ? "ANSWER" : "QUESTION"}
+                                    </p>
+                                    <p className="text-xl md:text-2xl text-gray-800 leading-relaxed whitespace-pre-line">
+                                        {showAnswer ? flashcards[currentCard].answer : flashcards[currentCard].question}
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="text-center mt-6">
+                                <button
+                                    onClick={handleFlip}
+                                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors shadow-md"
+                                >
+                                    {showAnswer ? "Show Question" : "Show Answer"}
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className="flex justify-between items-center gap-4">
+                            <button
+                                onClick={handlePrevious}
+                                disabled={currentCard === 0}
+                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-colors ${
+                                    currentCard === 0
+                                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                        : 'bg-white text-indigo-600 hover:bg-indigo-50 shadow-md'
+                                }`}
+                            >
+                                <ChevronLeft />
+                                Previous
+                            </button>
+
+                            <div className="flex gap-2">
+                                {flashcards.map((_, index) => (
+                                    <div
+                                        key={index}
+                                        className={`w-2 h-2 rounded-full transition-colors ${
+                                            index === currentCard ? 'bg-indigo-600' : 'bg-gray-300'
+                                        }`}
+                                    />
+                                ))}
+                            </div>
+
+                            <button
+                                onClick={handleNext}
+                                disabled={currentCard === flashcards.length - 1}
+                                className={`flex items-center gap-2 px-6 py-3 rounded-lg font-semibold transition-colors ${
+                                    currentCard === flashcards.length - 1
+                                        ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
+                                        : 'bg-white text-indigo-600 hover:bg-indigo-50 shadow-md'
+                                }`}
+                            >
+                                Next
+                                <ChevronRight />
+                            </button>
+                        </div>
+
+                        <div className="text-center mt-6 text-sm text-gray-600">
+                            Click the card or button to flip • Use arrows to navigate
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        ReactDOM.render(<FlashcardApp />, document.getElementById('root'));
+    </script>
+</body>
+</html>
